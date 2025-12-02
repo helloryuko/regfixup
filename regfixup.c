@@ -15,14 +15,14 @@ void copy_file(char* in, char* out);
 void print_help();
 
 int main(int argc, char* argv[]) {
-  puts("regfixup 1.0 (https://github.com/helloryuko/regfixup)");
+  puts("regfixup 1.1 (https://github.com/helloryuko/regfixup)");
 
   if (argc < 2) {
     print_help();
     return 0;
   }
 
-  char* hive_path = argv[1];
+  char* hive_path = "\0";
   enum SEQ_PREFERENCE seq_pref = UNSPECIFIED;
   bool checksum_only = false;
 
@@ -32,23 +32,30 @@ int main(int argc, char* argv[]) {
   bool fixed_seq = false;
   bool fixed_checksum = false;
 
-  for (int i = 2; i < argc; i++) {
+  for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "-p") == 0)
       seq_pref = PRIMARY;
     else if (strcmp(argv[i], "-s") == 0)
       seq_pref = SECONDARY;
     else if (strcmp(argv[i], "-c") == 0)
       checksum_only = true;
-    
     else if (strcmp(argv[i], "-h") == 0) {
       print_help();
       return 0;
     }
-    else {
+    else if (argv[i][0] == '-') {
       printf("error: invalid parameter: \"%s\"", argv[i]);
       return 3;
     }
+    else {
+      hive_path = argv[i];
+    }
   };
+
+  if (hive_path[0] == '\0') {
+    printf("error: no hive path provided\n");
+    return 3;
+  }
 
   hive_file = fopen(hive_path, "rb");
   if (hive_file == NULL) {
