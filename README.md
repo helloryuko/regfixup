@@ -9,6 +9,26 @@ Examples:
 Releases page has the latest Windows build. For other platforms see "Build instructions"
 
 ## How to use
+```
+regfixup 1.1 (https://github.com/helloryuko/regfixup)
+fix broken registry hives with desynchronized sequence numbers or wrong checksum
+
+usage: regfixup [hive file location]
+
+optional parameters:
+  -h  show this help message
+  -p  prefer primary sequence number
+  -s  prefer secondary sequence number
+  -c  only recalculate checksum
+
+return codes:
+  0   fixup successful or not required
+  1   can't open file
+  2   file isn't a regfile
+  3   invalid parameters
+```
+
+## I just want to fix my BSOD, how?
 ### Find the broken registry hive
 1. Boot into a Windows installation medium
 2. Choose language and click "Repair options"
