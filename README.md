@@ -49,6 +49,12 @@ return codes:
 4. Reboot, you can do that with `wpeutil reboot` command
 
 ## Build instructions
+### CMake (any platform)
+0. Download any C compiler and CMake
+1. Create `build` folder
+2. `cd build`
+3. `cmake ..`
+4. `cmake --build .`
 ### Windows
 0. Download Visual Studio
 1. Open "Developer Command Prompt"
